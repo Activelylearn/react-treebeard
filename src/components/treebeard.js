@@ -17,6 +17,7 @@ class TreeBeard extends React.Component {
         if (!Array.isArray(data)) {
             data = [data];
         }
+
         return (
             <ul style={style.tree.base}
                 ref={ref => this.treeBaseRef = ref}>
@@ -26,7 +27,8 @@ class TreeBeard extends React.Component {
                               key={node.id || index}
                               node={node}
                               onToggle={onToggle}
-                              style={style.tree.node}/>
+                              style={style.tree.node}
+                              customProps={this.props.customProps}/>
                 )}
             </ul>
         );

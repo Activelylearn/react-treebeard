@@ -32,11 +32,13 @@ Toggle.propTypes = {
     style: PropTypes.object
 };
 
-const Header = ({node, style}) => {
+const Header = ({node, style, onEdit}) => {
     return (
         <div style={style.base}>
             <div style={style.title}>
                 {node.name}
+                &nbsp;
+                <span onClick={(e) => onEdit(e, node)}>[edit]</span>
             </div>
         </div>
     );
@@ -49,7 +51,7 @@ Header.propTypes = {
 @Radium
 class Container extends React.Component {
     render() {
-        const {style, decorators, terminal, onClick, node} = this.props;
+        const {style, decorators, terminal, onClick, node, customProps} = this.props;
 
         return (
             <div onClick={onClick}
@@ -57,8 +59,7 @@ class Container extends React.Component {
                  style={style.container}>
                 {!terminal ? this.renderToggle() : null}
 
-                <decorators.Header node={node}
-                                   style={style.header}/>
+                <Header node={node} style={style.header} {...customProps}/>
             </div>
         );
     }

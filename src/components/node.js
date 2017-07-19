@@ -85,7 +85,8 @@ class TreeNode extends React.Component {
                         decorators={decorators}
                         node={Object.assign({}, node)}
                         onClick={this.onClick}
-                        style={style}/>
+                        style={style}
+                        customProps={this.props.customProps}/>
         );
     }
 
@@ -109,7 +110,8 @@ class TreeNode extends React.Component {
                                                           decorators={propDecorators}
                                                           key={child.id || index}
                                                           node={child}
-                                                          style={style}/>
+                                                          style={style}
+                                                          customProps={this.props.customProps}/>
                 )}
             </ul>
         );

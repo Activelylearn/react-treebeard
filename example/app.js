@@ -78,6 +78,11 @@ class DemoTree extends React.Component {
         this.setState({data: filtered});
     }
 
+    onEdit(e, node) {
+        e.stopPropagation();
+        console.log('Editing ', node);
+    }
+
     render() {
         const {data: stateData, cursor} = this.state;
 
@@ -97,7 +102,8 @@ class DemoTree extends React.Component {
                 <div style={styles.component}>
                     <Treebeard data={stateData}
                                decorators={decorators}
-                               onToggle={this.onToggle}/>
+                               onToggle={this.onToggle}
+                               customProps={{onEdit: this.onEdit}}/>
                 </div>
                 <div style={styles.component}>
                     <NodeViewer node={cursor}/>
