@@ -149,12 +149,13 @@ const decorators = {
 
 <Treebeard data={...} decorators={decorators}/>
 
-### Custom props
-This property will be passed on to every node element.
-For example, you add an edit button on every node, when click this button, you want to invoke something like ()=>onEdit(props.node).
-In that case, you would like to write like <Treebeard customProps={{onEdit: this.onEdit}} />. Then, in every node, you can use props.onEdit.
-
 ```
+
+#### customProps
+This property will be passed on to every node element.
+For example, you add an edit button on every node, when click this button, you want to invoke something like `()=>onEdit(props.node)`.
+In that case, you would like to write like `<Treebeard customProps={{onEdit: this.onEdit}} />`. Then, in every node, you can use `props.onEdit`.
+
 
 ### Data Attributes
 
