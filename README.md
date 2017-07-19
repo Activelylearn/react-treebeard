@@ -65,11 +65,16 @@ class TreeExample extends React.Component {
         if(node.children){ node.toggled = toggled; }
         this.setState({ cursor: node });
     }
+    onEdit(e, node) {
+        e.stopPropagation();
+        console.log('Editing ', node);
+    }
     render(){
         return (
             <Treebeard
                 data={data}
                 onToggle={this.onToggle}
+                customProps={{onEdit: this.onEdit}}
             />
         );
     }
@@ -143,6 +148,12 @@ const decorators = {
 };
 
 <Treebeard data={...} decorators={decorators}/>
+
+### Custom props
+This property will be passed on to every node element.
+For example, you add an edit button on every node, when click this button, you want to invoke something like ()=>onEdit(props.node).
+In that case, you would like to write like <Treebeard customProps={{onEdit: this.onEdit}} />. Then, in every node, you can use props.onEdit.
+
 ```
 
 ### Data Attributes
