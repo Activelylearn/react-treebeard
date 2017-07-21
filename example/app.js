@@ -12,23 +12,6 @@ import * as filters from './filter';
 
 const HELP_MSG = 'Select A Node To See Its Data Structure Here...';
 
-// Example: Customising The Header Decorator To Include Icons
-decorators.Header = ({style, node}) => {
-    const iconType = node.children ? 'folder' : 'file-text';
-    const iconClass = `fa fa-${iconType}`;
-    const iconStyle = {marginRight: '5px'};
-
-    return (
-        <div style={style.base}>
-            <div style={style.title}>
-                <i className={iconClass} style={iconStyle}/>
-
-                {node.name}
-            </div>
-        </div>
-    );
-};
-
 class NodeViewer extends React.Component {
     render() {
         const style = styles.viewer;
@@ -51,21 +34,30 @@ class DemoTree extends React.Component {
 
         this.state = {data};
         this.onToggle = this.onToggle.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
-    onToggle(node, toggled) {
-        const {cursor} = this.state;
+    onClick(e, node) {
+        e.stopPropagation();
+        const {activeNode} = this.state;
 
-        if (cursor) {
-            cursor.active = false;
+        if (activeNode) {
+            activeNode.active = false;
         }
 
         node.active = true;
+
+        this.setState({activeNode: node});
+    }
+
+    onToggle(node, toggled) {
+        const {toggledNode} = this.state;
+
         if (node.children) {
             node.toggled = toggled;
         }
 
-        this.setState({cursor: node});
+        this.setState({toggledNode: node});
     }
 
     onFilterMouseUp(e) {
@@ -84,7 +76,7 @@ class DemoTree extends React.Component {
     }
 
     render() {
-        const {data: stateData, cursor} = this.state;
+        const {data: stateData, toggledNode} = this.state;
 
         return (
             <StyleRoot>
@@ -103,10 +95,11 @@ class DemoTree extends React.Component {
                     <Treebeard data={stateData}
                                decorators={decorators}
                                onToggle={this.onToggle}
+                               onClick={this.onClick}
                                customProps={{onEdit: this.onEdit}}/>
                 </div>
                 <div style={styles.component}>
-                    <NodeViewer node={cursor}/>
+                    <NodeViewer node={toggledNode} />
                 </div>
             </StyleRoot>
         );

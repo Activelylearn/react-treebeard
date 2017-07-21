@@ -32,11 +32,11 @@ Toggle.propTypes = {
     style: PropTypes.object
 };
 
-const Header = ({node, style, onEdit}) => {
+const Header = ({node, style, onClick, onEdit}) => {
     return (
         <div style={style.base}>
             <div style={style.title}>
-                {node.name}
+                <span onClick={onClick}>{node.name}</span>
                 &nbsp;
                 <span onClick={(e) => onEdit(e, node)}>[edit]</span>
             </div>
@@ -54,12 +54,12 @@ class Container extends React.Component {
         const {style, decorators, terminal, onClick, node, customProps} = this.props;
 
         return (
-            <div onClick={onClick}
+            <div onClick={this.props.onToggle}
                  ref={ref => this.clickableRef = ref}
                  style={style.container}>
                 {!terminal ? this.renderToggle() : null}
 
-                <Header node={node} style={style.header} {...customProps}/>
+                <Header node={node} style={style.header} onClick={onClick} {...customProps}/>
             </div>
         );
     }

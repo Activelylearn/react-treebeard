@@ -94,7 +94,13 @@ Data that drives the tree view. State-driven effects can be built by manipulatin
 #### onToggle
 `PropTypes.func`
 
-Callback function when a node is toggled / clicked. Passes 2 attributes: the data node and it's toggled boolean state.
+Callback function when a node is toggled. Passes 2 attributes: the data node and it's toggled boolean state.
+
+#### onClick
+`PropTypes.func`
+
+Callback function when a node is clicked. Passes 2 attributes: the click's targetElement and the data node.
+
 
 #### style
 `PropTypes.object`

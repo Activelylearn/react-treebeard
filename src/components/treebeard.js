@@ -27,6 +27,7 @@ class TreeBeard extends React.Component {
                               key={node.id || index}
                               node={node}
                               onToggle={onToggle}
+                              onClick={this.props.onClick}
                               style={style.tree.node}
                               customProps={this.props.customProps}/>
                 )}
