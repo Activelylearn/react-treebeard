@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
-import {VelocityComponent} from 'velocity-react';
 
 const Loading = ({style}) => {
     return <div style={style}>loading...</div>;
@@ -71,13 +70,7 @@ class Container extends React.Component {
             return this.renderToggleDecorator();
         }
 
-        return (
-            <VelocityComponent animation={animations.toggle.animation}
-                               duration={animations.toggle.duration}
-                               ref={ref => this.velocityRef = ref}>
-                {this.renderToggleDecorator()}
-            </VelocityComponent>
-        );
+        return this.renderToggleDecorator();
     }
 
     renderToggleDecorator() {
